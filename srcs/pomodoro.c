@@ -32,23 +32,26 @@ int	cronom(int minutes)
 int	main(int argc, char **argv)
 {
 	int	repeats;
+	int i;
 
 	system("clear");
 	repeats = argc == 4 ? ft_atoi(argv[3]) : 10;
+	i = 0;
 	if (argc <= 1)
 	{
 		ft_printf("\x1b[31mWrong arguments\x1b[0m\n");
 		return (0);
 	}
-	while (repeats)
+	while (repeats && (ft_atoi(argv[1]) > 0 || ft_atoi(argv[2]) > 0))
 	{
 		ft_printf("\n\x1b[33mWork time\x1b[0m\n");
 		repeats -= cronom(ft_atoi(argv[1]));
+		i++;
 		system("clear");
 		ft_printf("\n\x1b[34mRest time\x1b[0m\n");
 		cronom(ft_atoi(argv[2]));
 	}
 	system("clear");
-	ft_printf("\n\x1b[32mYou complete %i repeats\x1b[0m\n", repeats);
+	ft_printf("\n\x1b[32mYou complete %i repeats\x1b[0m\n", i);
 	return (0);
 }
