@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include "libft.h"
-#include "ft_printf.h"
+#include "pomodoro.h"
 
 int	cronom(int minutes)
 {
@@ -29,29 +25,58 @@ int	cronom(int minutes)
 	return (1);
 }
 
+void	final_msg(int i)
+{
+	int	x;
+	int	x2;
+
+	x = 0;
+	x2 = 0;
+	if (i < 60)
+		ft_printf("\n\x1b[32mYou've been concentrate %.2d minutes\x1b[0m\n\n", i);
+	else
+	{
+		x = i / 60;
+		x2 = x;
+		while (x2--)
+			i -= 60;
+		ft_printf("\n\x1b[32mYou've been concentrate %.2d hours and %.2d minutes\x1b[0m\n\n", x, i);
+	}
+	system(BELL_PATH);
+}
+
 int	main(int argc, char **argv)
 {
 	int	repeats;
 	int i;
+	int	stdy_time;
+	int	rest_time;
 
 	system("clear");
-	repeats = argc == 4 ? ft_atoi(argv[3]) : 10;
 	i = 0;
-	if (argc <= 1)
+	if (argc < 3)
 	{
-		ft_printf("\x1b[31mWrong arguments\x1b[0m\n");
+		ft_printf("\7\n\x1b[31mWrong arguments\n");
+		ft_printf("Programm needs almost 2 numberic arguments\n\x1b[0m\n");
 		return (0);
 	}
-	while (repeats && (ft_atoi(argv[1]) > 0 || ft_atoi(argv[2]) > 0))
+	stdy_time = ft_atoi(argv[1]);
+	rest_time = ft_atoi(argv[2]);
+	repeats = argc == 4 ? ft_atoi(argv[3]) : 3;
+	while (repeats && (stdy_time > 0 || rest_time > 0))
 	{
 		ft_printf("\n\x1b[33mWork time\x1b[0m\n");
-		repeats -= cronom(ft_atoi(argv[1]));
-		i++;
+		if (i)
+			system(BELL_PATH);
+		repeats -= cronom(stdy_time);
+		i += stdy_time;
 		system("clear");
 		ft_printf("\n\x1b[34mRest time\x1b[0m\n");
-		cronom(ft_atoi(argv[2]));
+		system(BELL_PATH);
+		cronom(rest_time);
 	}
 	system("clear");
-	ft_printf("\n\x1b[32mYou complete %i repeats\x1b[0m\n", i);
+	if (i)
+		final_msg(i);
 	return (0);
 }
