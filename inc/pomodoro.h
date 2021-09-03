@@ -9,6 +9,7 @@
 
 # define BELL_PATH "afplay ./Media/Bell.wav"
 
-int	cronom(int minutes);
+int		cronom(int minutes);
+void	final_msg(int i);
 
 #endif
