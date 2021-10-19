@@ -14,7 +14,7 @@ all:	$(NAME)
 $(NAME):	$(OBJS) $(INSTALL_PATH)
 	@echo Installing...
 	@sleep 5
-	$(CC) $(CFLAGS) $(MAIN) $(INC)*.a -o $@
+	$(CC) $(CFLAGS) $(OBJS) $(INC)*.a -o $@
 	@cp -R $(MEDIA) $(INSTALL_PATH)
 	@mv $(NAME) $(INSTALL_PATH)
 	@make clean
