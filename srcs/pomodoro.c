@@ -33,14 +33,14 @@ void	final_msg(int i)
 	x = 0;
 	x2 = 0;
 	if (i < 60)
-		ft_printf("\n\x1b[32mYou've been concentrate %.2d minutes\x1b[0m\n\n", i);
+		ft_printf("\n\x1b[32mYou've been concentrated %.2d minutes\x1b[0m\n\n", i);
 	else
 	{
 		x = i / 60;
 		x2 = x;
 		while (x2--)
 			i -= 60;
-		ft_printf("\n\x1b[32mYou've been concentrate %.2d hours and %.2d minutes\x1b[0m\n\n", x, i);
+		ft_printf("\n\x1b[32mYou've been concentrated %.2d hours and %.2d minutes\x1b[0m\n\n", x, i);
 	}
 	system(BELL_PATH);
 }
@@ -57,7 +57,7 @@ int	main(int argc, char **argv)
 	if (argc < 3)
 	{
 		ft_printf("\7\n\x1b[31mWrong arguments\n");
-		ft_printf("Programm needs almost 2 numberic arguments\n\x1b[0m\n");
+		ft_printf("Program needs almost 2 numeric arguments\n\x1b[0m\n");
 		return (0);
 	}
 	stdy_time = ft_atoi(argv[1]);
